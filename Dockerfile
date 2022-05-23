@@ -2,22 +2,22 @@ FROM bitnami/minideb:stretch
 MAINTAINER ifiht <peter@never.lan>
 
 # Copy application files
-COPY . /app
+COPY ./etc /etc
 # Install required system packages
+
 RUN apt-get update
-RUN apt-get -y install privoxy
-# Install NPM dependencies
-#RUN npm install --prefix /app
-#EXPOSE 80
-#CMD ["npm", "start", "--prefix", "app"]
-#COPY samba.sh /usr/bin/
+RUN apt-get -y install privoxy tor software-properties-common
+RUN apt-get update
+RUN apt-add-repository ppa:i2p-maintainers/i2p
+RUN apt-get -y install i2p
 
-EXPOSE 137/udp 138/udp 139 445
+EXPOSE 8080/tcp
+EXPOSE 8080/udp
+#EXPOSE 137/udp 138/udp 139 445
 
-HEALTHCHECK --interval=60s --timeout=15s \
-            CMD smbclient -L \\localhost -U % -m SMB3
+#HEALTHCHECK --interval=60s --timeout=15s \
+#            CMD smbclient -L \\localhost -U % -m SMB3
 
-VOLUME ["/etc", "/var/cache/samba", "/var/lib/samba", "/var/log/samba",\
-            "/run/samba"]
+VOLUME ["/etc", "/opt/i2psnark"]
 
-ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/samba.sh"]
+#ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/samba.sh"]
