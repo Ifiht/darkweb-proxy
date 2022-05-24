@@ -1,0 +1,38 @@
+root@272529d1a1c4:/# /usr/bin/yggdrasil -useconffile /etc/yggdrasil.conf
+2022/05/24 03:24:41 Build name: yggdrasil
+2022/05/24 03:24:41 Build version: 0.4.3
+2022/05/24 03:24:41 Starting up...
+2022/05/24 03:24:41 Startup complete
+2022/05/24 03:24:41 Starting multicast module
+panic: CreateTUN("\x00") failed; /dev/net/tun does not exist
+
+goroutine 18 [running]:
+github.com/yggdrasil-network/yggdrasil-go/src/tuntap.(*TunAdapter).setup(0xc0000a2540, {0xc0000187b0, 0xc00003fca0}, {0xc000074330, 0x27}, 0x0)
+        /home/circleci/project/src/tuntap/tun_linux.go:20 +0x226
+github.com/yggdrasil-network/yggdrasil-go/src/tuntap.(*TunAdapter)._start(0xc0000a2540)
+        /home/circleci/project/src/tuntap/tun.go:135 +0x2b4
+github.com/yggdrasil-network/yggdrasil-go/src/tuntap.(*TunAdapter).Start.func1()
+        /home/circleci/project/src/tuntap/tun.go:108 +0x26
+github.com/Arceliar/phony.Block.func1()
+        /go/pkg/mod/github.com/!arceliar/phony@v0.0.0-20210209235338-dde1a8dca979/actor.go:80 +0x26
+github.com/Arceliar/phony.(*Inbox).run(0xc0000a2588)
+        /go/pkg/mod/github.com/!arceliar/phony@v0.0.0-20210209235338-dde1a8dca979/actor.go:89 +0x34
+created by github.com/Arceliar/phony.(*Inbox).restart
+        /go/pkg/mod/github.com/!arceliar/phony@v0.0.0-20210209235338-dde1a8dca979/actor.go:121 +0x5b
+root@272529d1a1c4:/# mkdir /dev/net && mknod /dev/net/tun c 10 200
+root@272529d1a1c4:/# chmod 0666 /dev/net/tun
+root@272529d1a1c4:/# /usr/bin/yggdrasil -useconffile /etc/yggdrasil.conf
+2022/05/24 03:25:05 Build name: yggdrasil
+2022/05/24 03:25:05 Build version: 0.4.3
+2022/05/24 03:25:05 Starting up...
+2022/05/24 03:25:05 Startup complete
+2022/05/24 03:25:05 Starting multicast module
+2022/05/24 03:25:05 UNIX admin socket listening on /var/run/yggdrasil.sock
+2022/05/24 03:25:05 An error occurred starting TUN/TAP: permission denied
+2022/05/24 03:25:05 Your public key is 85fb282c0ef97439fb3068eeb7dc4fc4b65b46420ab1bd8193e57366e552e76d
+2022/05/24 03:25:05 Your IPv6 address is 200:f409:afa7:e20d:178c:99f:2e22:9047
+2022/05/24 03:25:05 Your IPv6 subnet is 300:f409:afa7:e20d::/64
+^C2022/05/24 03:25:34 Stopping multicast module
+2022/05/24 03:25:34 Stopping...
+2022/05/24 03:25:34 Stopped
+root@272529d1a1c4:/#

@@ -1,0 +1,24 @@
+{
+    "apps": [
+        {
+            "name": "tor",
+            "script": "./homepage/server.js",
+            "exec_interpreter": "none",
+            "exec_mode"  : "fork"
+        },
+        {
+            "name": "yggdrasil",
+            "script": "/usr/bin/yggdrasil",
+            "args": " -useconffile /etc/yggdrasil.conf",
+            "exec_interpreter": "none",
+            "exec_mode"  : "fork"
+        },
+        {
+            "name": "i2p",
+            "script": "./blog/index.js",
+            "max_memory_restart": "200M",
+            "exec_interpreter": "none",
+            "exec_mode": "fork"
+        }
+    ]
+}
