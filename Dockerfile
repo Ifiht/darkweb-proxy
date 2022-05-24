@@ -7,6 +7,17 @@ ENV TERM linux
 ENV GPG_TTY /dev/console
 ENV DEBIAN_FRONTEND noninteractive
 
+#+=======[ ADD APT REPOS ]======================+#
+RUN gpg --fetch-keys https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt
+RUN gpg --export 569130E8CA20FBC4CB3FDE555898470A764B32C9 | tee /usr/share/keyrings/yggdrasil-keyring.gpg > /dev/null
+RUN echo 'deb [signed-by=/usr/share/keyrings/yggdrasil-keyring.gpg] http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil' \
+    | tee /etc/apt/sources.list.d/yggdrasil.list
+RUN echo "deb https://deb.i2p2.de/ $(lsb_release -sc) main" \
+    | tee /etc/apt/sources.list.d/i2p.list
+# remove "-k" from production builds!!!
+RUN curl -k -o /usr/share/keyrings/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring.gpg
+RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2p-archive-keyring.gpg
+
 #+=======[ PRIVOXY & TOR ]======================+#
 RUN apt-get update
 RUN apt-get -y install apt-utils
@@ -15,22 +26,8 @@ RUN apt-get -y install apt-transport-https ca-certificates curl dirmngr gnupg ls
     net-tools procps
     #!! ^ debug builds only!!
 
-#+=======[ I2P SETUP ]==========================+#
-RUN echo "deb https://deb.i2p2.de/ $(lsb_release -sc) main" \
-    | tee /etc/apt/sources.list.d/i2p.list
-# remove "-k" from production builds!!!
-RUN curl -k -o /usr/share/keyrings/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring.gpg
-RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2p-archive-keyring.gpg
-RUN apt-get update
-RUN apt-get -y install i2p i2p-keyring
-
-#+=======[ YGGDRASIL SETUP ]====================+#
-RUN gpg --fetch-keys https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt
-RUN gpg --export 569130E8CA20FBC4CB3FDE555898470A764B32C9 | tee /usr/share/keyrings/yggdrasil-keyring.gpg > /dev/null
-RUN echo 'deb [signed-by=/usr/share/keyrings/yggdrasil-keyring.gpg] http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil' \
-    | tee /etc/apt/sources.list.d/yggdrasil.list
-RUN apt-get update
-RUN apt-get install yggdrasil
+#+=======[ I2P & YGGDRASIL SETUP ]=====+#
+RUN apt-get -y install i2p i2p-keyring yggdrasil
 RUN echo "tun" >> /etc/modules
 
 # Copy application files
