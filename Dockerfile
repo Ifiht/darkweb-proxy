@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 #+=======[ PRIVOXY & TOR ]======================+#
 RUN apt-get update
-RUN apt-get -y apt-utils
+RUN apt-get -y install apt-utils
 RUN apt-get -y install apt-transport-https ca-certificates curl dirmngr gnupg lsb-release software-properties-common \
     privoxy tor \
     net-tools procps
