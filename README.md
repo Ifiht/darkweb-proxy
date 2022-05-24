@@ -23,7 +23,8 @@ For the above purpose, this container acts as a proxy server. The image should b
 ### Default Mode (easiest)
 
 ```
-sudo docker run --name darkweb-proxy \
+sudo docker run --network host \
+    --name darkweb-proxy \
     --cap-add=NET_ADMIN \
     --cap-add=NET_BIND_SERVICE \
     ifiht/darkweb-proxy:latest
@@ -32,7 +33,8 @@ sudo docker run --name darkweb-proxy \
 ### Custom Configs (intermediate)
 
 ```
-sudo docker run --name darkweb-proxy \
+sudo docker run --network host \
+    --name darkweb-proxy \
     --cap-add=NET_ADMIN \
     --cap-add=NET_BIND_SERVICE \
     ifiht/darkweb-proxy:latest
