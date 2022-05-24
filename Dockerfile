@@ -9,16 +9,16 @@ ENV DEBIAN_FRONTEND noninteractive
 
 #+=======[ INSTALL PRE-REQS ]===================+#
 RUN apt-get update
-RUN apt-get -y install apt-utils apt-transport-https ca-certificates curl dirmngr gnupg lsb-release
+RUN apt-get -y install apt-utils apt-transport-https ca-certificates curl dirmngr gnupg lsb-release software-properties-common
 
 #+=======[ ADD APT REPOS ]======================+#
 RUN gpg --fetch-keys https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt
 RUN gpg --export 569130E8CA20FBC4CB3FDE555898470A764B32C9 | tee /usr/share/keyrings/yggdrasil-keyring.gpg > /dev/null
 RUN echo 'deb [signed-by=/usr/share/keyrings/yggdrasil-keyring.gpg] http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil' \
-    > /etc/apt/sources.list.d/yggdrasil.list
+    | tee /etc/apt/sources.list.d/yggdrasil.list
 RUN echo "deb https://deb.i2p2.de/ $(lsb_release -sc) main" \
-    > /etc/apt/sources.list.d/i2p.list
-#    | tee /etc/apt/sources.list.d/i2p.list   software-properties-common
+    | tee /etc/apt/sources.list.d/i2p.list   
+#software-properties-common
 # remove "-k" from production builds!!!
 RUN curl -k -o /usr/share/keyrings/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring.gpg
 RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2p-archive-keyring.gpg
