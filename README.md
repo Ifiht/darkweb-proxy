@@ -1,3 +1,5 @@
+![docker build](https://github.com/Ifiht/darkweb-proxy/actions/workflows/docker-image.yml/badge.svg)
+
 # darkweb-proxy
 Yggdrasil, I2P, and Tor all in one docker container
  - https://yggdrasil-network.github.io/
