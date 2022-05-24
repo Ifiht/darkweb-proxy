@@ -18,7 +18,8 @@ RUN apt-get -y install apt-transport-https ca-certificates curl dirmngr gnupg ls
 #+=======[ I2P SETUP ]==========================+#
 RUN echo "deb https://deb.i2p2.de/ $(lsb_release -sc) main" \
     | tee /etc/apt/sources.list.d/i2p.list
-RUN curl -o /usr/share/keyrings/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring.gpg
+# remove "-k" from production builds!!!
+RUN curl -k -o /usr/share/keyrings/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring.gpg
 RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2p-archive-keyring.gpg
 RUN apt-get update
 RUN apt-get -y install i2p i2p-keyring
