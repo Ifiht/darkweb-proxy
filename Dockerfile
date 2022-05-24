@@ -9,14 +9,15 @@ ENV DEBIAN_FRONTEND noninteractive
 
 #+=======[ INSTALL PRE-REQS ]===================+#
 RUN apt-get update
-RUN apt-get -y install apt-utils apt-transport-https ca-certificates curl dirmngr gnupg lsb-release software-properties-common
+RUN apt-get -y install apt-utils ca-certificates curl dirmngr gnupg lsb-release
+#software-properties-common apt-transport-https 
 
 #+=======[ ADD APT REPOS ]======================+#
 RUN gpg --fetch-keys https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt
 RUN gpg --export 569130E8CA20FBC4CB3FDE555898470A764B32C9 | tee /usr/share/keyrings/yggdrasil-keyring.gpg > /dev/null
 RUN echo 'deb [signed-by=/usr/share/keyrings/yggdrasil-keyring.gpg] http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil' \
     | tee /etc/apt/sources.list.d/yggdrasil.list
-RUN echo "deb https://deb.i2p2.de/ $(lsb_release -sc) main" \
+RUN echo "deb http://deb.i2p2.de/ $(lsb_release -sc) main" \
     | tee /etc/apt/sources.list.d/i2p.list   
 #software-properties-common
 # remove "-k" from production builds!!!
