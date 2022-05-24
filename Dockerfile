@@ -39,7 +39,7 @@ COPY ./etc /etc
 #CMD mkdir /dev/net && mknod /dev/net/tun c 10 200
 #CMD chmod 0666 /dev/net/tun
 #CMD /usr/bin/yggdrasil -useconffile /etc/yggdrasil.conf
-CMD ['pm2-docker', '/opt/procs.json']
+ENTRYPOINT ['pm2-docker', '/opt/procs.json']
 
 EXPOSE 8080/tcp
 EXPOSE 8080/udp
