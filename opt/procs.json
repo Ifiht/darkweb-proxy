@@ -1,24 +1,18 @@
 {
     "apps": [
         {
+            "name": "privoxy",
+            "script": "/usr/sbin/privoxy",
+            "args": "--pidfile /var/run/privoxy.pid --user privoxy --no-daemon /etc/privoxy/config",
+            "exec_interpreter": "none",
+            "exec_mode"  : "fork"
+        },
+        {
             "name": "tor",
-            "script": "./homepage/server.js",
+            "script": "/usr/bin/tor",
+            "args": "-f /etc/tor/torrc --RunAsDaemon 0",
             "exec_interpreter": "none",
             "exec_mode"  : "fork"
-        },
-        {
-            "name": "yggdrasil",
-            "script": "/usr/bin/yggdrasil",
-            "args": " -useconffile /etc/yggdrasil.conf",
-            "exec_interpreter": "none",
-            "exec_mode"  : "fork"
-        },
-        {
-            "name": "i2p",
-            "script": "./blog/index.js",
-            "max_memory_restart": "200M",
-            "exec_interpreter": "none",
-            "exec_mode": "fork"
         }
     ]
 }

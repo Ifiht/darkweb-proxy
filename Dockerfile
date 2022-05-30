@@ -27,22 +27,25 @@ RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2
 #+=======[ YGGDRASIL, PRIVOXY, TOR, I2P ]=======+#
 RUN apt-get update
 RUN apt-get -y install privoxy tor i2p i2p-keyring yggdrasil \
-    net-tools procps
+    nano net-tools procps
     #!! ^ debug builds only!!
 
 #+=======[ SYSTEM SETUP ]=======================+#
 RUN echo "tun" >> /etc/modules
+RUN mkdir /var/run/tor && chown debian-tor:debian-tor /var/run/tor && chmod 700 /var/run/tor
+#RUN mkdir /dev/net && mknod /dev/net/tun c 10 200
+#RUN chmod 0666 /dev/net/tun
 
 # Copy application files
-COPY ./etc /etc
+COPY ./etc /etc/
+COPY ./opt /opt/
 
-#CMD mkdir /dev/net && mknod /dev/net/tun c 10 200
-#CMD chmod 0666 /dev/net/tun
+
 #CMD /usr/bin/yggdrasil -useconffile /etc/yggdrasil.conf
-ENTRYPOINT ['pm2-docker', '/opt/procs.json']
+#ENTRYPOINT ["pm2-docker", "/opt/procs.json"] pm2-docker /opt/procs.json
 
-EXPOSE 8080/tcp
-EXPOSE 8080/udp
+#EXPOSE 8080/tcp
+#EXPOSE 8080/udp
 
 #HEALTHCHECK --interval=60s --timeout=15s \
 #            CMD smbclient -L \\localhost -U % -m SMB3

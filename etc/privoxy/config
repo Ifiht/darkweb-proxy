@@ -449,6 +449,8 @@ enable-proxy-authentication-forwarding 0
 #      Privoxy at all. Of course this may actually be desired and
 #      there is no reason to make these exceptions if you aren't sure
 #      you need them.
+#forward-socks5t / 127.0.0.1:9050 .
+forward-socks5t .onion localhost:9050 .
 forward .i2p localhost:4444
 forward .ygg localhost:4444
 #
