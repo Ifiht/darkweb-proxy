@@ -1,7 +1,7 @@
 ![docker build](https://github.com/Ifiht/darkweb-proxy/actions/workflows/docker-image.yml/badge.svg)
 
 # darkweb-proxy
-Yggdrasil, I2P, and Tor all in one docker container
+Privoxy, I2P, and Tor all in one docker container
  - https://yggdrasil-network.github.io/
  - https://geti2p.net/en/
  - https://www.torproject.org/
@@ -10,7 +10,7 @@ Yggdrasil, I2P, and Tor all in one docker container
 
 #### Philosophy: "A simple _self contained_ image that anyone with docker skills can deploy, to access the greatest extent of the dark web possible"
 
-Currently the container grants access to the Tor Project, Invisible Internet Project, and Yggdrasil networks. Should all of these be separated into their own containers and integrated through the docker bridge network? According to Docker: **"each container should do one thing and do it well."**. However, the author of this container has decided that that **one thing** is dark web access, and this container does it well. If in the future, more maintainers come along and consensus moves towards splitting the image, the project could move that way. But for now, as my personal project, one image this will remain.
+Currently the container grants access to the Tor Project and Invisible Internet Project networks, while also providing a regular internet proxy. Should all of these be separated into their own containers and integrated through the docker bridge network? According to Docker: **"each container should do one thing and do it well."**. However, the author of this container has decided that that **one thing** is dark web access, and this container does it well. If in the future, more maintainers come along and consensus moves towards splitting the image, the project could move that way. But for now, as my personal project, one image this will remain.
 
 For the above purpose, this container acts as a proxy server. The image should be deployed on a the host machine, secured intranet, or LAN, and the client computers pointed to the proxy. Everything else is seemless, all websites will now load based on the top-level domain (TLD), e.g. `.com` will load regular internet, `.i2p` will load eepsites, etc.
 
