@@ -40,7 +40,7 @@ confdir /etc/privoxy
 #      logfile is located).
 #  Notes:
 #      No trailing "/", please.
-logdir /home/sindri/var/log/privoxy
+logdir /var/log/privoxy
 #
 #  2.5. actionsfile
 #  =================
@@ -452,7 +452,8 @@ enable-proxy-authentication-forwarding 0
 #forward-socks5t / 127.0.0.1:9050 .
 forward-socks5t .onion localhost:9050 .
 forward .i2p localhost:4444
-forward .ygg localhost:4444
+forward i2prouter.local localhost:7657
+#forward .ygg localhost:4444
 #
 #
 #  5.3. forwarded-connect-retries
