@@ -14,10 +14,7 @@ RUN apt-get -y install apt ca-certificates curl dirmngr gnupg
 
 #+=======[ ADD APT REPOS ]======================+#
 RUN echo "deb http://deb.i2p2.de/ buster main" \
-    | tee /etc/apt/sources.list.d/i2p.list  
-# temp fix for npm not resolving repo:
-RUN echo "104.16.16.35 registry.npmjs.org" \
-    | tee /etc/hosts
+    | tee /etc/apt/sources.list.d/i2p.list 
 #software-properties-common
 # remove "-k" from production builds!!!
 #RUN curl -k -o /usr/share/keyrings/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring.gpg
@@ -35,7 +32,9 @@ RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2
 #RUN mkdir /var/run/tor && chown debian-tor:debian-tor /var/run/tor && chmod 700 /var/run/tor
 #RUN mkdir /dev/net && mknod /dev/net/tun c 10 200
 #RUN chmod 0666 /dev/net/tun
-RUN npm install pm2 -g
+# temp fix for npm not resolving repo:
+#RUN npm install pm2 -g
+RUN npm install https://github.com/Unitech/pm2/archive/refs/tags/5.2.2.tar.gz -g
 
 # Copy application files
 COPY ./etc /etc/
