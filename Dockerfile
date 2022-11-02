@@ -14,7 +14,10 @@ RUN apt-get -y install apt ca-certificates curl dirmngr gnupg
 
 #+=======[ ADD APT REPOS ]======================+#
 RUN echo "deb http://deb.i2p2.de/ buster main" \
-    | tee /etc/apt/sources.list.d/i2p.list   
+    | tee /etc/apt/sources.list.d/i2p.list  
+# temp fix for npm not resolving repo:
+RUN echo "104.16.16.35 registry.npmjs.org" \
+    | tee /etc/hosts
 #software-properties-common
 # remove "-k" from production builds!!!
 #RUN curl -k -o /usr/share/keyrings/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring.gpg
