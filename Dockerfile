@@ -34,7 +34,8 @@ RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2
 #RUN chmod 0666 /dev/net/tun
 # temp fix for npm not resolving repo:
 #RUN npm install pm2 -g
-RUN npm install https://github.com/Unitech/pm2/archive/refs/tags/5.2.2.tar.gz -g
+COPY ./packages /opt/
+RUN npm install /opt/pm2_latest.tar.gz -g
 
 # Copy application files
 COPY ./etc /etc/
