@@ -1,5 +1,4 @@
-FROM node:current-buster
-#debian:buster-slim
+FROM keymetrics/pm2:18-buster
 MAINTAINER ifiht <peter@never.lan>
 
 #+=======[ ENV VARS ]===========================+#
@@ -22,20 +21,16 @@ COPY ./i2p-archive-keyring.gpg /usr/share/keyrings/i2p-archive-keyring.gpg
 RUN ln -sf /usr/share/keyrings/i2p-archive-keyring.gpg /etc/apt/trusted.gpg.d/i2p-archive-keyring.gpg
 
 #+=======[ PRIVOXY, TOR, I2P ]=======+#
-#RUN apt-get update
-#RUN apt-get -y install privoxy tor i2p i2p-keyring \
-#    nano net-tools procps
+RUN apt-get update
+RUN apt-get -y install privoxy tor i2p i2p-keyring \
+    nano net-tools procps
     #!! ^ debug builds only!!
 
 #+=======[ SYSTEM SETUP ]=======================+#
 #RUN echo "tun" >> /etc/modules
-#RUN mkdir /var/run/tor && chown debian-tor:debian-tor /var/run/tor && chmod 700 /var/run/tor
+RUN mkdir /var/run/tor && chown debian-tor:debian-tor /var/run/tor && chmod 700 /var/run/tor
 #RUN mkdir /dev/net && mknod /dev/net/tun c 10 200
 #RUN chmod 0666 /dev/net/tun
-# temp fix for npm not resolving repo:
-#RUN npm install pm2 -g
-COPY ./packages /opt/
-RUN npm install /opt/pm2_latest.tar.gz -g
 
 # Copy application files
 COPY ./etc /etc/
@@ -43,9 +38,11 @@ COPY ./opt /opt/
 
 #ENTRYPOINT ["pm2-docker", "/opt/procs.json"]
 ENTRYPOINT ["pm2-runtime", "start", "/opt/procs.json"]
+#CMD privoxy --pidfile /var/run/privoxy.pid --user privoxy --no-daemon /etc/privoxy/config
+#ENTRYPOINT ["bash"]
 
-#EXPOSE 8080/tcp
-#EXPOSE 8080/udp
+EXPOSE 28080
+#EXPOSE 28080/udp
 
 #HEALTHCHECK --interval=60s --timeout=15s \
 #            CMD smbclient -L \\localhost -U % -m SMB3
