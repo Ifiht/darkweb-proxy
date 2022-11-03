@@ -16,7 +16,7 @@ Privoxy, I2P, and Tor all in one docker container
   sudo docker run --name darkweb_proxy --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE -p 127.0.0.2:8080:8080 -it ifiht/darkweb-proxy:alpha
   ```
 - Point your browser to the proxy:
-
+![Firefox Setup](img/firefox_proxy_settings.png?raw=true "Firefox Setup")
 - Enjoy!
 
 ## Container Design
