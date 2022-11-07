@@ -1,10 +1,11 @@
 ![docker build](https://github.com/Ifiht/darkweb-proxy/actions/workflows/docker-image.yml/badge.svg)
 
 # darkweb-proxy
-Privoxy, I2P, and Tor all in one docker container
- - :white_check_mark: https://www.privoxy.org/
- - :ballot_box_with_check: https://geti2p.net/en/
- - :white_check_mark: https://www.torproject.org/
+Privoxy, I2P, IPFS, and Tor all in one docker container
+ - :heavy_check_mark: https://www.privoxy.org/
+ - :radio_button: https://geti2p.net/en/
+ - :heavy_check_mark: https://www.torproject.org/
+ - :radio_button: https://ipfs.tech/
 
 ## Quickstart
 
