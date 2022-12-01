@@ -1,13 +1,14 @@
 ![docker build](https://github.com/Ifiht/darkweb-proxy/actions/workflows/docker-image.yml/badge.svg)
 
 # darkweb-proxy
-Privoxy, I2P, IPFS, and Tor all in one docker container
+Privoxy, I2P, IPFS, and Tor all in one docker container.
  - :heavy_check_mark: https://www.privoxy.org/
  - :radio_button: https://geti2p.net/en/
  - :heavy_check_mark: https://www.torproject.org/
  - :radio_button: https://ipfs.tech/
 
 ## Quickstart
+_Note: significant bandwidth required. Works fine on the 2GB Digital Ocean droplets:droplet: - https://m.do.co/c/f77d76dc3bce (referral link)_
 
 - Clone the repo, build & start:
   ```
@@ -18,7 +19,7 @@ Privoxy, I2P, IPFS, and Tor all in one docker container
   ```
 - Point your browser to the proxy:
 ![Firefox Setup](img/firefox_proxy_settings.png?raw=true "Firefox Setup")
-- Enjoy!
+- Enjoy!  
 
 ## Container Design
 
